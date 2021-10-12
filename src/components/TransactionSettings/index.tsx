@@ -57,6 +57,7 @@ const Input = styled.input`
 `
 
 const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }>`
+  width: 2rem;
   height: 2rem;
   position: relative;
   padding: 0 0.75rem;
@@ -130,12 +131,21 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     <AutoColumn>
       <AutoColumn>
         <RowFixed>
-          <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
-            Slippage tolerance
+          <TYPE.black fontWeight={400} fontSize={20} color={theme.text2} style={{ padding: "20px 0" }}>
+            Slip tolerance
           </TYPE.black>
           <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
         </RowFixed>
         <RowBetween>
+          <Option
+            onClick={() => {
+              setSlippageInput('')
+              setRawSlippage(70)
+            }}
+            active={rawSlippage === 70}
+          >
+            Automatic
+          </Option>
           <Option
             onClick={() => {
               setSlippageInput('')

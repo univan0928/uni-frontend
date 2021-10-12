@@ -14,9 +14,6 @@ enum SlippageError {
   RiskyHigh = 'RiskyHigh'
 }
 
-enum DeadlineError {
-  InvalidInput = 'InvalidInput'
-}
 
 const FancyButton = styled.button`
   color: ${({ theme }) => theme.text1};
@@ -98,11 +95,11 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
   const inputRef = useRef<HTMLInputElement>()
 
   const [slippageInput, setSlippageInput] = useState('')
-  const [deadlineInput, setDeadlineInput] = useState('')
+  
 
   const slippageInputIsValid =
     slippageInput === '' || (rawSlippage / 100).toFixed(2) === Number.parseFloat(slippageInput).toFixed(2)
-  const deadlineInputIsValid = deadlineInput === '' || (deadline / 60).toString() === deadlineInput
+  
 
   let slippageError: SlippageError | undefined
   if (slippageInput !== '' && !slippageInputIsValid) {
@@ -115,12 +112,6 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     slippageError = undefined
   }
 
-  let deadlineError: DeadlineError | undefined
-  if (deadlineInput !== '' && !deadlineInputIsValid) {
-    deadlineError = DeadlineError.InvalidInput
-  } else {
-    deadlineError = undefined
-  }
 
   function parseCustomSlippage(value: string) {
     setSlippageInput(value)
@@ -133,20 +124,11 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     } catch {}
   }
 
-  function parseCustomDeadline(value: string) {
-    setDeadlineInput(value)
-
-    try {
-      const valueAsInt: number = Number.parseInt(value) * 60
-      if (!Number.isNaN(valueAsInt) && valueAsInt > 0) {
-        setDeadline(valueAsInt)
-      }
-    } catch {}
-  }
+  
 
   return (
-    <AutoColumn gap="md">
-      <AutoColumn gap="sm">
+    <AutoColumn>
+      <AutoColumn>
         <RowFixed>
           <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
             Slippage tolerance
@@ -222,31 +204,6 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
           </RowBetween>
         )}
       </AutoColumn>
-
-      <AutoColumn gap="sm">
-        <RowFixed>
-          <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-            Transaction deadline
-          </TYPE.black>
-          <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
-        </RowFixed>
-        <RowFixed>
-          <OptionCustom style={{ width: '80px' }} tabIndex={-1}>
-            <Input
-              color={!!deadlineError ? 'red' : undefined}
-              onBlur={() => {
-                parseCustomDeadline((deadline / 60).toString())
-              }}
-              placeholder={(deadline / 60).toString()}
-              value={deadlineInput}
-              onChange={e => parseCustomDeadline(e.target.value)}
-            />
-          </OptionCustom>
-          <TYPE.body style={{ paddingLeft: '8px' }} fontSize={14}>
-            minutes
-          </TYPE.body>
-        </RowFixed>
-      </AutoColumn>
-    </AutoColumn>
+    </AutoColumn>  
   )
 }

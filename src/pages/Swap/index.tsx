@@ -48,7 +48,6 @@ import Loader from '../../components/Loader'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import UnsupportedCurrencyFooter from 'components/swap/UnsupportedCurrencyFooter'
 import { isTradeBetter } from 'utils/trades'
-
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
 
@@ -291,7 +290,9 @@ export default function Swap() {
 
   const swapIsUnsupported = useIsTransactionUnsupported(currencies?.INPUT, currencies?.OUTPUT)
   const [selected, setSelected] = useState("");
-  const percent = ["25%", "50%", "75%", "100%"];  
+  const percent = ["25", "50", "75", "100"];  
+  const [userSlippageTolerance, setUserslippageTolerance] = useUserSlippageTolerance()
+
   return (
     <>
       <TokenWarningModal
@@ -335,10 +336,13 @@ export default function Swap() {
                   {percent.map((item) => (
                     
                       <div
-                        onClick={() => setSelected(item)}
-                        style={{ color: selected === item? theme.primaryText2:theme.primaryText3, backgroundColor: selected === item? theme.bg6:theme.bg7, padding: "1rem", margin: "5px", borderRadius: "5px" }}
+                        onClick={() => {
+                          setSelected(item)
+                          setUserslippageTolerance(Number(item))  
+                        }}
+                        style={{ color: userSlippageTolerance && selected === item? theme.primaryText2:theme.primaryText3, backgroundColor: selected === item? theme.bg6:theme.bg7, padding: "1rem", margin: "5px", borderRadius: "5px" }}
                       >
-                        {item}
+                        {item}%
                       </div>
                    
                   ))}

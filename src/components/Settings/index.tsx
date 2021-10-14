@@ -14,6 +14,8 @@ import {
 import { ButtonError } from '../Button'
 import { AutoColumn } from '../Column'
 import Modal from '../Modal'
+import { TYPE } from '../../theme'
+
 
 import { RowBetween } from '../Row'
 
@@ -95,7 +97,7 @@ const MenuFlyout = styled.span`
   font-size: 1rem;
   position: absolute;
   top: 3rem;
-  right: 0rem;
+  right: -1.21874rem;
   z-index: 100;
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -190,9 +192,9 @@ export default function SettingsTab() {
       {open && (
         <MenuFlyout>
           <AutoColumn gap="md" style={{ padding: '2rem 3rem 2rem' }}>
-            <Text fontWeight={600} fontSize={30}>
+            <TYPE.black fontWeight={600} fontSize={30}>
               Process Settings
-            </Text>
+            </TYPE.black>
             <TransactionSettings
               rawSlippage={userSlippageTolerance}
               setRawSlippage={setUserslippageTolerance}

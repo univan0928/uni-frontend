@@ -192,7 +192,7 @@ export default function SettingsTab() {
       {open && (
         <MenuFlyout>
           <AutoColumn gap="md" style={{ padding: '2rem 3rem 2rem' }}>
-            <TYPE.black fontWeight={600} fontSize={30}>
+            <TYPE.black fontWeight={600} fontSize={30}  style={{ fontFamily:'Roboto' }}>
               Process Settings
             </TYPE.black>
             <TransactionSettings

@@ -131,7 +131,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     <AutoColumn>
       <AutoColumn>
         <RowFixed>
-          <TYPE.black fontWeight={400} fontSize={20} color={theme.text2} style={{ padding: "20px 0" }}>
+          <TYPE.black fontWeight={400} fontSize={20} color={theme.text2} style={{ padding: "20px 0", fontFamily:'Roboto' }}>
             Slip tolerance
           </TYPE.black>
           <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
@@ -204,7 +204,8 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
             style={{
               fontSize: '14px',
               paddingTop: '7px',
-              color: slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E'
+              color: slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E',
+              fontFamily:'Roboto'
             }}
           >
             {slippageError === SlippageError.InvalidInput

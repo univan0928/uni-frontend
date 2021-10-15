@@ -416,20 +416,20 @@ export default function Swap() {
               </Card>
             )}
           </AutoColumn>
-          <BottomGrouping>
+          <BottomGrouping style={{ fontFamily:'Roboto' }}>
             {swapIsUnsupported ? (
-              <ButtonPrimary disabled={true}>
+              <ButtonPrimary disabled={true} style={{ fontFamily:'Roboto' }}>
                 <TYPE.main mb="4px">Unsupported Asset</TYPE.main>
               </ButtonPrimary>
             ) : !account ? (
-              <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              <ButtonLight onClick={toggleWalletModal} style={{ fontFamily:'Roboto' }}>Connect Wallet</ButtonLight>
             ) : showWrap ? (
-              <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
+              <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap} style={{ fontFamily:'Roboto' }}>
                 {wrapInputError ??
                   (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
               </ButtonPrimary>
             ) : noRoute && userHasSpecifiedInputOutput ? (
-              <GreyCard style={{ textAlign: 'center' }}>
+              <GreyCard style={{ textAlign: 'center', fontFamily:'Roboto' }}>
                 <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
                 {singleHopOnly && <TYPE.main mb="4px">Try enabling multi-hop trades.</TYPE.main>}
               </GreyCard>
@@ -441,9 +441,10 @@ export default function Swap() {
                   width="48%"
                   altDisabledStyle={approval === ApprovalState.PENDING} // show solid button while waiting
                   confirmed={approval === ApprovalState.APPROVED}
+                  style={{ fontFamily:'Roboto' }}
                 >
                   {approval === ApprovalState.PENDING ? (
-                    <AutoRow gap="6px" justify="center">
+                    <AutoRow gap="6px" justify="center" style={{ fontFamily:'Roboto' }}>
                       Approving <Loader stroke="white" />
                     </AutoRow>
                   ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
@@ -453,6 +454,7 @@ export default function Swap() {
                   )}
                 </ButtonConfirmed>
                 <ButtonError
+                  style={{ fontFamily:'Roboto' }}
                   onClick={() => {
                     if (isExpertMode) {
                       handleSwap()
@@ -482,6 +484,7 @@ export default function Swap() {
               </RowBetween>
             ) : (
               <ButtonError
+                style={{ fontFamily:'Roboto' }}
                 onClick={() => {
                   if (isExpertMode) {
                     handleSwap()
@@ -509,7 +512,7 @@ export default function Swap() {
               </ButtonError>
             )}
             {showApproveFlow && (
-              <Column style={{ marginTop: '1rem' }}>
+              <Column style={{ marginTop: '1rem', fontFamily:'Roboto' }}>
                 <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />
               </Column>
             )}

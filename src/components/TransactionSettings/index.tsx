@@ -143,6 +143,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
               setRawSlippage(70)
             }}
             active={rawSlippage === 70}
+            style={{ fontFamily:'Roboto' }}
           >
             Automatic
           </Option>

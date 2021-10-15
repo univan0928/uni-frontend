@@ -225,10 +225,17 @@ export default function AccountDetails({
   ENSName,
   openOptions
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React()
+  const { chainId, account, connector, deactivate } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
 
+  async function disconnect() {
+    try {
+      deactivate()
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
   function formatConnectorName() {
     const { ethereum } = window
     const isMetaMask = !!(ethereum && ethereum.isMetaMask)
@@ -304,7 +311,7 @@ export default function AccountDetails({
                 <div>
                   {connector !== injected && connector !== walletlink && (
                     <WalletAction
-                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
+                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px', fontFamily:'Roboto' }}
                       onClick={() => {
                         ;(connector as any).close()
                       }}
@@ -313,13 +320,19 @@ export default function AccountDetails({
                     </WalletAction>
                   )}
                   <WalletAction
-                    style={{ fontSize: '.825rem', fontWeight: 400 }}
+                    style={{ fontSize: '.825rem', fontWeight: 400, fontFamily:'Roboto' }}
                     onClick={() => {
                       openOptions()
                     }}
                   >
                     Change
                   </WalletAction>
+                  <WalletAction
+                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px', fontFamily:'Roboto' }}
+                      onClick={disconnect}
+                    >
+                      Disconnect
+                    </WalletAction>
                 </div>
               </AccountGroupingRow>
               <AccountGroupingRow id="web3-account-identifier-row">

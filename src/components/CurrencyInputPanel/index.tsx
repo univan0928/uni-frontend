@@ -221,7 +221,7 @@ export default function CurrencyInputPanel({
                   {pair?.token0.symbol}:{pair?.token1.symbol}
                 </StyledTokenName>
               ) : (
-                <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
+                <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)} style={{ fontFamily:'Roboto' }}>
                   {(currency && currency.symbol && currency.symbol.length > 20
                     ? currency.symbol.slice(0, 4) +
                       '...' +
